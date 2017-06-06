@@ -10,4 +10,3 @@ const config = {
 };
 
 export const firebaseApp = firebase.initializeApp(config);
-//export const usersRef = firebase.database().ref('users');
