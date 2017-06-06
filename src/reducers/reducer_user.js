@@ -1,17 +1,9 @@
-import { SIGNED_IN } from '../actions';
+import { LOG_IN } from '../actions';
 
-let user = {
-  uid: null
-}
-
-export default (state = user, action) => {
+export default (state = {}, action) => {
   switch (action.type) {
-    case SIGNED_IN:
-      const { uid } = action;
-      user = {
-        uid
-      }
-      return user;
+    case LOG_IN:
+      return action.user;
     default:
       return state;
   }

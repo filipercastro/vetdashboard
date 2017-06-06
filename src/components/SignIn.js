@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { firebaseApp } from '../firebase';
+import { logIn } from '../actions';
 
 class SignIn extends Component {
   constructor(props) {
@@ -27,12 +28,11 @@ class SignIn extends Component {
   }
 
   onSubmit(values) {
-    const { email, password } = values;
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
-     .then(() => {this.props.history.push('/home')})
-     .catch(error => {
-       this.setState({error})
-     })
+    this.props.logIn(
+      values,
+      () => {this.props.history.push('/home');},
+      (error) => {this.setState({error});}
+    );
   }
 
   render() {
@@ -75,4 +75,6 @@ class SignIn extends Component {
 
 export default reduxForm({
   form: 'signIn' // a unique identifier for this form
-})(SignIn)
+})(
+  connect(null, { logIn })(SignIn)
+);
