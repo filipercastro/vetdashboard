@@ -17,11 +17,25 @@ export function logIn(values, callback, errorCallback) {
   return dispatch => {
     const { email, password } = values;
     firebaseApp.auth().signInWithEmailAndPassword(email, password)
-     .then((data) => {
+     .then(() => {
        callback();
-       dispatch(fetchRole(data.uid));
      })
      .catch(error => {errorCallback(error)});
+  }
+}
+
+export function checkLogin(callback, errorcallback) {
+  return dispatch => {
+    firebaseApp.auth().onAuthStateChanged(data => {
+      if (data) {
+        callback();
+        console.log(`User ${data.uid} is logged in`);
+        dispatch(fetchRole(data.uid));
+      } else {
+        errorcallback();
+        console.log("No user");
+      }
+    });
   }
 }
 

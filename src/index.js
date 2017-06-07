@@ -2,38 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { BrowserRouter, Route } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
-// import { firebaseApp } from './firebase';
-// import { logUser } from './actions';
 import reducers from './reducers';
-import SignIn from './components/SignIn';
-import Home from './components/Home';
-
-// firebaseApp.auth().onAuthStateChanged(user => {
-//   if (user) {
-//     // console.log('user has signed in or up', user);
-//     const { uid } = user;
-//     store.dispatch(logUser(uid));
-//     //browserHistory.push('/home');
-//   } else {
-//     console.log('user has signed out or still needs to sign in.')
-//     //browserHistory.replace('/signin');
-//   }
-// })
+import App from './components/App'
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
 ReactDOM.render(
   <Provider store={store}>
-    <BrowserRouter>
+    <BrowserRouter >
       <div>
-        <Switch>
-          <Route path="/home" component={Home} />
-          <Route path="/" component={SignIn} />
-        </Switch>
+        <Route path="/" component={App} />
       </div>
     </BrowserRouter>
   </Provider>

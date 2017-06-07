@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { logIn } from '../actions';
 import '../style/signin.css';
+import doge from "../images/doge.png";
 
 class SignIn extends Component {
   constructor(props) {
@@ -25,7 +26,15 @@ class SignIn extends Component {
             <input {...input} className="form-control" placeholder={label} type={type} />
           </div>
         </div>
-        <div>{touched && error && <span>{error}</span>}</div>
+        {touched && error &&
+          <div className="row">
+            <div className="col-xs-3"></div>
+            <div className="error col-xs-9">
+              <i className="glyphicon glyphicon glyphicon-ban-circle"></i>
+              &nbsp;
+              <span>{error}</span>
+            </div>
+          </div>}
       </div>
     )
   }
@@ -43,7 +52,10 @@ class SignIn extends Component {
 
     return (
       <div className="signinContainer">
-        <h3 className="text-center">Vet Dashboard Sign In</h3>
+        <div className="header">
+          <img src={doge} alt="Doge" height="42" width="42" />
+          <h3 className="text-center">Vet Dashboard Sign In</h3>
+        </div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="email"
@@ -57,7 +69,7 @@ class SignIn extends Component {
             component={this.renderField}
             label="Password"
           />
-          <div className="text-center">{this.state.error.message}</div>
+          <div className="error text-center">{this.state.error.message}</div>
           <div>
             <button
               className="btn btn-primary"
@@ -76,11 +88,11 @@ function validate(values) {
   const errors = {};
 
   if (!values.email) {
-    errors.email = "Enter an email";
+    errors.email = "Please enter an email";
   }
 
   if (!values.password) {
-    errors.password = "Enter a password";
+    errors.password = "Please enter a password";
   }
 
   // If errors is empty, the form is fine to submit

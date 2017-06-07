@@ -11,7 +11,7 @@ class Home extends Component {
           className="btn btn-danger"
           onClick={() => {
             this.props.logOut(() => {
-              this.props.history.push('/');
+              this.props.history.push('/signin');
             });
           }}
         >
