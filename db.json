@@ -1,0 +1,26 @@
+{
+  "users": {
+    "u1fuioTn81Y3zyQ7wDo6cWwMCTj2": {
+      "name": "Filipe",
+      "role": "admin"
+    }
+  },
+  "patients": {
+    "Bandit": {
+      "name": "Bandit",
+      "exams": {
+        "pending": "Blood Test",
+        "done": "X-Ray, MRI"
+      },
+      "discharge": "22:00, December 25, 2017"
+    },
+    "Valentina": {
+      "name": "Valentina",
+      "exams": {
+        "pending": "",
+        "done": "Blood Test, Lombar punction"
+      },
+      "discharge": "08:00, November 18, 2017"
+    }
+  }
+}

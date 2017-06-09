@@ -1,29 +1,23 @@
 import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import { logOut } from '../actions'
+//import { connect } from 'react-redux';
+
+import Header from './Header';
+import PatientsList from './PatientsList';
 
 class Home extends Component {
   render() {
     return (
       <div>
-        {this.props.user.role}
-        <button
-          className="btn btn-danger"
-          onClick={() => {
-            this.props.logOut(() => {
-              this.props.history.push('/signin');
-            });
-          }}
-        >
-          Log Out
-        </button>
+        <Header />
+        <PatientsList />
       </div>
     )
   }
 }
 
-function mapStateToProps(state) {
-  return { user: state.user };
-}
+// function mapStateToProps(state) {
+//   return { user: state.user };
+// }
 
-export default connect(mapStateToProps, { logOut })(Home);;
+//export default connect(mapStateToProps, { logOut })(Home);;
+export default Home;

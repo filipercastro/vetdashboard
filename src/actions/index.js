@@ -1,14 +1,15 @@
-import * as firebase from 'firebase'
-import { firebaseApp } from '../firebase';
+import { db, auth } from '../firebase';
 
-export const LOG_IN = 'LOG_IN';
+export const FETCH_USER = 'FETCH_USER';
 export const LOG_OUT = 'LOG_OUT';
+export const FETCH_PATIENTS = 'FETCH_PATIENTS'
 
-export function fetchRole(uid) {
-  const usersRef = firebase.database().ref('users/' + uid);
+export function fetchUser(uid) {
+  const usersRef = db.ref('users/' + uid);
   return dispatch => {
     usersRef.on('value', (snap) => {
-      dispatch({type: LOG_IN, user: snap.val()});
+      dispatch({type: FETCH_USER, user: snap.val()});
+      console.log(`Fetch user role: ${JSON.stringify(snap.val())}`)
     })
   }
 }
@@ -16,23 +17,22 @@ export function fetchRole(uid) {
 export function logIn(values, callback, errorCallback) {
   return dispatch => {
     const { email, password } = values;
-    firebaseApp.auth().signInWithEmailAndPassword(email, password)
+    auth.signInWithEmailAndPassword(email, password)
      .then(() => {
+       console.log("Logged in");
        callback();
      })
      .catch(error => {errorCallback(error)});
   }
 }
 
-export function checkLogin(callback, errorcallback) {
+export function checkLogin() {
   return dispatch => {
-    firebaseApp.auth().onAuthStateChanged(data => {
+    auth.onAuthStateChanged(data => {
       if (data) {
-        callback();
         console.log(`User ${data.uid} is logged in`);
-        dispatch(fetchRole(data.uid));
+        dispatch(fetchUser(data.uid));
       } else {
-        errorcallback();
         console.log("No user");
       }
     });
@@ -41,10 +41,20 @@ export function checkLogin(callback, errorcallback) {
 
 export function logOut(callback) {
   return dispatch => {
-    firebaseApp.auth().signOut()
+    auth.signOut()
       .then(() => {
         callback();
         dispatch({type: LOG_OUT, user: {}});
       });
+  }
+}
+
+export function fetchPatientList() {
+  const patientsRef = db.ref('patients');
+  return dispatch => {
+    patientsRef.on('value', (snap) => {
+      dispatch({type: FETCH_PATIENTS, patients: snap.val()});
+      console.log(`Fetch patients: ${JSON.stringify(snap.val())}`);
+    })
   }
 }

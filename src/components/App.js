@@ -9,24 +9,10 @@ import { checkLogin } from '../actions';
 class App extends Component {
 
   componentDidMount() {
-    this.props.checkLogin(
-      () => {this.props.history.push('/home');},
-      () => {this.props.history.push('/signin');},
-    );
+    this.props.checkLogin();
   }
 
   render() {
-    // const { user } = this.props;
-    // if (!user.role) {
-    //   historyHandler.push('/signin');
-    //   console.log("no user");
-    // }
-    // else {
-    //   debugger;
-    //   historyHandler.push('/home');
-    //   console.log("has user");
-    // }
-
     return (
       <BrowserRouter>
         <div>

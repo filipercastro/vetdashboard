@@ -54,7 +54,7 @@ class SignIn extends Component {
       <div className="signinContainer">
         <div className="header">
           <img src={doge} alt="Doge" height="42" width="42" />
-          <h3 className="text-center">Vet Dashboard Sign In</h3>
+          <h3 className="text-center">Vet Dashboard</h3>
         </div>
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
@@ -67,7 +67,7 @@ class SignIn extends Component {
             name="password"
             type="password"
             component={this.renderField}
-            label="Password"
+            label="Senha"
           />
           <div className="error text-center">{this.state.error.message}</div>
           <div>
@@ -75,7 +75,7 @@ class SignIn extends Component {
               className="btn btn-primary"
               type="submit"
               disabled={submitting || pristine}>
-              Log In
+              Entrar
             </button>
           </div>
         </form>
@@ -88,11 +88,11 @@ function validate(values) {
   const errors = {};
 
   if (!values.email) {
-    errors.email = "Please enter an email";
+    errors.email = "Email não pode estar vazio";
   }
 
   if (!values.password) {
-    errors.password = "Please enter a password";
+    errors.password = "Senha não pode estar vazia";
   }
 
   // If errors is empty, the form is fine to submit
