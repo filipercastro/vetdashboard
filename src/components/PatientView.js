@@ -193,8 +193,9 @@ function mapStateToProps({ patients, vets, systems }, ownProps) {
          };
 }
 
-export default reduxForm({
-  form: 'patientEdit'
-})(
-  connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, fetchSystems })(PatientView)
-);
+export default connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, fetchSystems })(
+  reduxForm({
+    form: 'patientEdit',
+    enableReinitialize : true
+  })(PatientView)
+)
