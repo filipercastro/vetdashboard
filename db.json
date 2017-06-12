@@ -5,22 +5,40 @@
       "role": "admin"
     }
   },
+  "vets": ["Lilian", "Anacelis", "Keini"],
+  "systems": ["Respiratorio", "Digestivo", "Nervoso"],
   "patients": {
-    "Bandit": {
+    "1": {
+      "register": "1",
       "name": "Bandit",
       "exams": {
         "pending": "Blood Test",
         "done": "X-Ray, MRI"
       },
-      "discharge": "22:00, December 25, 2017"
+      "discharge": "22:00, December 25, 2017",
+      "race": "Meio Maltez",
+      "genre": "male",
+      "preDiagnose": "Comeu cocô",
+      "admissionVet": "Lilian",
+      "fwd": false,
+      "age": 5,
+      "weight": 0.7
     },
-    "Valentina": {
+    "4321": {
+      "register": "4321",
       "name": "Valentina",
       "exams": {
         "pending": "",
         "done": "Blood Test, Lombar punction"
       },
-      "discharge": "08:00, November 18, 2017"
+      "discharge": "08:00, November 18, 2017",
+      "race": "Vira Lata",
+      "genre": "female",
+      "preDiagnose": "Correu ate super aquecer",
+      "admissionVet": "Anacelis",
+      "fwd": true,
+      "age": 3,
+      "weight": 1.5
     }
   }
 }

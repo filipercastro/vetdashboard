@@ -2,21 +2,31 @@ import _ from 'lodash';
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPatientList } from '../actions'
+import { Link } from 'react-router-dom';
 
 class PatientsList extends Component {
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchPatientList();
   }
 
   renderPatients() {
     return _.map(this.props.patients, patient => {
-      const { name, "exams": { pending, done }, discharge } = patient;
+      const { register, name, "exams": { pending, done }, discharge } = patient;
       return (
-        <tr key={name}>
+        <tr key={register}>
+          <td>
+            <Link to={`/patient/${register}`}>
+              <span>{register}</span>
+            </Link>
+          </td>
           <td>{name}</td>
           <td>{done}</td>
           <td>{pending}</td>
-          <td><span className="glyphicon glyphicon-pushpin" aria-hidden="true"></span></td>
+          <td>
+            <Link to={`/protocol/${register}`}>
+              <span className="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
+            </Link>
+          </td>
           <td>{discharge}</td>
         </tr>
       );
@@ -29,6 +39,7 @@ class PatientsList extends Component {
         <table className="table table-hover">
           <thead>
             <tr>
+              <th>Ficha</th>
               <th>Internados</th>
               <th>Exames Realizados</th>
               <th>Exames Pendentes</th>
@@ -40,9 +51,9 @@ class PatientsList extends Component {
             {this.renderPatients()}
           </tbody>
         </table>
-        <button className="btn btn-primary">
+        <Link to="/patient/new" className="btn btn-primary">
           Admitir novo paciente
-        </button>
+        </Link>
       </div>
 
     )
