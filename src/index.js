@@ -6,7 +6,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import thunk from 'redux-thunk';
 
 import { auth } from './firebase';
-import { isAuth, fetchUser } from './actions';
+import { setAuth, fetchUser } from './actions';
 import reducers from './reducers';
 import SignIn from './components/SignIn';
 import Home from './components/Home';
@@ -17,13 +17,12 @@ import PatientView from './components/PatientView';
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
 const store = createStoreWithMiddleware(reducers);
 
-// TODO re-route based on being authenticated or not
 auth.onAuthStateChanged(data => {
   if (data) {
-    store.dispatch(isAuth());
+    store.dispatch(setAuth("auth"));
     store.dispatch(fetchUser(data.uid));
   } else {
-    console.log("No user");
+    store.dispatch(setAuth("notAuth"));
   }
 });
 

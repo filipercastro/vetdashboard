@@ -1,16 +1,17 @@
 import { db, auth } from '../firebase';
 
-export const IS_AUTH = 'IS_AUTH';
+export const SET_AUTH = 'SET_AUTH';
 export const FETCH_USER = 'FETCH_USER';
 export const LOG_OUT = 'LOG_OUT';
+export const LOG_IN = 'LOG_IN';
 export const FETCH_PATIENTS = 'FETCH_PATIENTS'
 export const FETCH_PATIENT = 'FETCH_PATIENT'
 export const SAVE_PATIENT = 'SAVE_PATIENT';
 export const FETCH_VETS = 'FETCH_VETS';
 export const FETCH_SYSTEMS = 'FETCH_SYSTEMS';
 
-export function isAuth() {
-  return {type: IS_AUTH, auth: true}
+export function setAuth(auth) {
+  return {type: SET_AUTH, auth}
 }
 
 export function fetchUser(uid) {
@@ -19,6 +20,19 @@ export function fetchUser(uid) {
     usersRef.on('value', (snap) => {
       dispatch({type: FETCH_USER, user: snap.val()});
     });
+  }
+}
+
+export function logIn(values, callback, errorCallback) {
+  return dispatch => {
+    dispatch(setAuth("loggingIn"));
+    const { email, password } = values;
+    auth.signInWithEmailAndPassword(email, password)
+      .then(() => {
+        callback();
+      })
+      .catch(error => {errorCallback(error);}
+      );
   }
 }
 

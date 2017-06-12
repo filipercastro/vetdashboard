@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
-import { auth } from '../firebase';
-import { fetchUser } from '../actions'
+import { logIn } from '../actions'
 import '../style/signin.css';
 import doge from "../images/doge.png";
 
@@ -41,12 +40,11 @@ class SignIn extends Component {
   }
 
   onSubmit(values) {
-    const { email, password } = values;
-    auth.signInWithEmailAndPassword(email, password)
-       .then(() => {
-         this.props.history.push('/home');
-       })
-       .catch(error => {this.setState({error})});
+    this.props.logIn(
+      values,
+      () => {this.props.history.push('/home')},
+      error => {this.setState({error})}
+    );
   }
 
   render() {
@@ -106,5 +104,5 @@ export default reduxForm({
   validate,
   form: 'signIn'
 })(
-  connect(null, { fetchUser })(SignIn)
+  connect(null, { logIn })(SignIn)
 );

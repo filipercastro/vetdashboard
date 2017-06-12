@@ -1,32 +1,32 @@
 import React, { Component } from 'react';
-//import { connect } from 'react-redux';
-//import { Redirect } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { Redirect } from 'react-router-dom';
 import Header from './Header';
 import PatientsList from './PatientsList';
 
 class Home extends Component {
 
   render() {
+    const { auth } = this.props.user;
+    if (auth === null || auth === "loggingIn") {
+      return <div>Loading...</div>
+    }
+
     return (
-      // !this.props.user.auth ? (
-      //   <Redirect to="/signin" />
-      // ) : (
-      //   <div>
-      //     <Header />
-      //     <PatientsList />
-      //   </div>
-      // )
-      <div>
-        <Header />
-        <PatientsList />
-      </div>
+      (auth === "notAuth") ? (
+        <Redirect to="/signin" />
+      ) : (
+        <div>
+          <Header />
+          <PatientsList />
+        </div>
+      )
     )
   }
 }
 
-// function mapStateToProps(state) {
-//   return { user: state.user };
-// }
-//
-// export default connect(mapStateToProps)(Home);
-export default Home;
+function mapStateToProps(state) {
+  return { user: state.user };
+}
+
+export default connect(mapStateToProps)(Home);
