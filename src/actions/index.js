@@ -64,10 +64,12 @@ export function fetchPatient(register) {
   }
 }
 
-export function savePatient(values) {
+export function savePatient(patient) {
+  const patientRef = db.ref(`patients/${patient.register}`);
   return dispatch => {
     console.log("save patient action creator");
-    dispatch({type: SAVE_PATIENT});
+    patientRef.set(patient);
+    dispatch({type: SAVE_PATIENT, patient});
   }
 }
 

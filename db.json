@@ -21,8 +21,11 @@
       "preDiagnose": "Comeu cocô",
       "admissionVet": "Lilian",
       "fwd": false,
+      "fwdInfo": {},
       "age": 5,
-      "weight": 0.7
+      "weight": 0.7,
+      "species": "Cachorro",
+      "system": "Digestivo"
     },
     "4321": {
       "register": "4321",
@@ -37,8 +40,15 @@
       "preDiagnose": "Correu ate super aquecer",
       "admissionVet": "Anacelis",
       "fwd": true,
+      "fwdInfo": {
+        "vet": "Fabiana",
+        "clinic": "Centro Veterinário Cambuí",
+        "cel": "19912345678"
+      },
       "age": 3,
-      "weight": 1.5
+      "weight": 1.5,
+      "species": "Cachorro",
+      "system": "Respiratorio"
     }
   }
 }
