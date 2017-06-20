@@ -34,6 +34,12 @@ class PatientsList extends Component {
   }
 
   render() {
+    const { patients } = this.props;
+
+    if (!patients) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div className="container">
         <table className="table table-hover">

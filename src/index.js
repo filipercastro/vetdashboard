@@ -11,7 +11,7 @@ import reducers from './reducers';
 import SignIn from './components/SignIn';
 import Home from './components/Home';
 import PatientView from './components/PatientView';
-// import PatientNew from './components/PatientNew';
+import PatientNew from './components/PatientNew';
 // import ProtocolView from './components/ProtocolView';
 
 const createStoreWithMiddleware = applyMiddleware(thunk)(createStore);
@@ -31,8 +31,8 @@ ReactDOM.render(
     <BrowserRouter>
       <div>
         <Switch>
-          {/* <Route path="/patient/new" component={PatientNew} />
-          <Route path="/protocol/:id" component={ProtocolView} /> */}
+          <Route path="/patient/new" component={PatientNew} />
+          {/*<Route path="/protocol/:id" component={ProtocolView} /> */}
           <Route path="/patient/:id" component={PatientView} />
           <Route path="/signin" component={SignIn} />
           <Route path="/home" component={Home} />
