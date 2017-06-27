@@ -24,7 +24,7 @@ class PendingExams extends Component {
   }
 
   renderExams() {
-    const { pending } = this.props.exams;
+    const { pending } = this.props;
 
     return pending.map((exam, index) => {
       return (
@@ -91,8 +91,4 @@ class PendingExams extends Component {
   }
 };
 
-function mapStateToProps({ exams }) {
-  return { exams };
-}
-
-export default connect(mapStateToProps, { addPendingExam, deletePendingExam })(PendingExams);
+export default connect(null, { addPendingExam, deletePendingExam })(PendingExams);

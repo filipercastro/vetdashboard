@@ -21,12 +21,12 @@ class PatientView extends Component {
   }
 
   onSubmit(values) {
-    // TODO: append values not covered by the form, e.g. exams
+    values.exams = this.props.exams;
     this.props.savePatient(values, () => this.setState({disabled: true}));
   }
 
   render() {
-    const { patient, vets, systems, history } = this.props;
+    const { patient, vets, systems, exams, history } = this.props;
 
     if (!patient) {
       return <div>Loading...</div>
@@ -46,10 +46,10 @@ class PatientView extends Component {
         />
         <div className="row">
           <div className="col-xs-4">
-            <DoneExams />
+            <DoneExams done = {exams.done}/>
           </div>
           <div className="col-xs-8">
-            <PendingExams />
+            <PendingExams pending = {exams.pending}/>
           </div>
         </div>
       </div>
@@ -57,12 +57,13 @@ class PatientView extends Component {
   }
 }
 
-function mapStateToProps({ patients, vets, systems }, ownProps) {
+function mapStateToProps({ patients, vets, systems, exams }, ownProps) {
   const patient = patients[ownProps.match.params.id];
   return {
            patient,
            vets,
-           systems
+           systems,
+           exams
          };
 }
 

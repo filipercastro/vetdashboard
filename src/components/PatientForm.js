@@ -192,24 +192,6 @@ class PatientForm extends Component {
               />
             </div>
           </div>
-          {/* <div className="formRow">
-            <Field
-              name="exams.done"
-              type="text"
-              component={TextField}
-              label="Exames realizados"
-              disabled = {disabled}
-            />
-            </div>
-            <div className="formRow">
-            <Field
-              name="exams.pending"
-              type="text"
-              component={TextField}
-              label="Exames pendentes"
-              disabled = {disabled}
-            />
-          </div> */}
         </form>
       </div>
     );

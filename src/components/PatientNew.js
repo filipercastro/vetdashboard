@@ -19,11 +19,12 @@ class PatientNew extends Component {
   }
 
   onSubmit(values) {
+    values.exams = this.props.exams;
     this.props.savePatient(values, () => this.props.history.push('/home'));
   }
 
   render() {
-    const { vets, systems, history } = this.props;
+    const { vets, systems, exams, history } = this.props;
     return (
       <div className="container">
         <Header />
@@ -36,10 +37,10 @@ class PatientNew extends Component {
         />
         <div className="row">
           <div className="col-xs-4">
-            <DoneExams />
+            <DoneExams done = {exams.done}/>
           </div>
           <div className="col-xs-8">
-            <PendingExams />
+            <PendingExams pending = {exams.pending} />
           </div>
         </div>
       </div>
@@ -47,10 +48,11 @@ class PatientNew extends Component {
   }
 }
 
-function mapStateToProps({ vets, systems }) {
+function mapStateToProps({ vets, systems, exams }) {
   return {
-     vets,
-     systems
+    exams,
+    vets,
+    systems
   };
 }
 

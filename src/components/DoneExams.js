@@ -14,7 +14,7 @@ class DoneExams extends Component {
   }
 
   renderExams() {
-    const { done } = this.props.exams;
+    const { done } = this.props;
 
     return done.map((exam, index) => {
       return (
@@ -63,8 +63,4 @@ class DoneExams extends Component {
   }
 };
 
-function mapStateToProps({ exams }) {
-  return { exams };
-}
-
-export default connect(mapStateToProps, { addDoneExam, deleteDoneExam })(DoneExams);
+export default connect(null, { addDoneExam, deleteDoneExam })(DoneExams);
