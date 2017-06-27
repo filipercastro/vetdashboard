@@ -7,13 +7,36 @@
   },
   "vets": ["Lilian", "Anacelis", "Keini"],
   "systems": ["Respiratorio", "Digestivo", "Nervoso"],
+  "extVets": {
+    "Fabiana Arakaki": {
+      "name": "Fabiana Arakaki",
+      "clinic": "Centro Veterinário Cambuí",
+      "cel": "19 9 1111-2222"
+    },
+    "Marco Antônio Castro": {
+      "name": "Marco Antônio Castro",
+      "clinic": "Dr. de Bixos",
+      "cel": ""
+    }
+  },
   "patients": {
     "1": {
       "register": "1",
       "name": "Bandit",
       "exams": {
-        "pending": "Blood Test",
-        "done": "X-Ray, MRI"
+        "pending": [
+          {
+            "name": "Blood Test",
+            "day": "25/10/17",
+            "time": "22:00"
+          },
+          {
+            "name": "MRI",
+            "day": "25/10/17",
+            "time": "23:00"
+          }
+        ],
+        "done": ["X-Ray", "MRI"]
       },
       "discharge": "22:00, December 25, 2017",
       "race": "Meio Maltez",
@@ -31,8 +54,8 @@
       "register": "4321",
       "name": "Valentina",
       "exams": {
-        "pending": "",
-        "done": "Blood Test, Lombar punction"
+        "pending": [],
+        "done": ["Blood Test", "Lombar punction"]
       },
       "discharge": "08:00, November 18, 2017",
       "race": "Vira Lata",
@@ -41,7 +64,7 @@
       "admissionVet": "Anacelis",
       "fwd": true,
       "fwdInfo": {
-        "vet": "Fabiana",
+        "vet": "Fabiana Arakaki",
         "clinic": "Centro Veterinário Cambuí",
         "cel": "19912345678"
       },

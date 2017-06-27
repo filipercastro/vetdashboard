@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, savePatient, fetchVets, fetchSystems } from '../actions'
-import Header from '../components/Header';
+import Header from './Header';
 import PatientForm from './PatientForm';
+import PendingExams from './PendingExams';
+import DoneExams from './DoneExams';
 
 class PatientView extends Component {
   constructor(props) {
@@ -19,6 +21,7 @@ class PatientView extends Component {
   }
 
   onSubmit(values) {
+    // TODO: append values not covered by the form, e.g. exams
     this.props.savePatient(values, () => this.setState({disabled: true}));
   }
 
@@ -30,18 +33,25 @@ class PatientView extends Component {
     }
 
     return (
-      <div>
+      <div className="container">
         <Header />
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
           redirectHome = {() => history.push('/home')}
           vets = {vets}
           systems = {systems}
-          patient = {patient}
           initialValues = {patient}
           disabled = {true}
           editing = {true}
         />
+        <div className="row">
+          <div className="col-xs-4">
+            <DoneExams />
+          </div>
+          <div className="col-xs-8">
+            <PendingExams />
+          </div>
+        </div>
       </div>
     )
   }
@@ -52,7 +62,7 @@ function mapStateToProps({ patients, vets, systems }, ownProps) {
   return {
            patient,
            vets,
-           systems,
+           systems
          };
 }
 

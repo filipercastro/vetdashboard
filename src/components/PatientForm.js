@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import TextField from '../components/TextField';
-import SelectField from '../components/SelectField';
-import CheckboxField from '../components/CheckboxField';
-import FwdField from '../components/FwdField';
+import SelectField from './SelectField';
+import CheckboxField from './CheckboxField';
+import FwdField from './FwdField';
 import '../style/patientForm.css';
 
 class PatientForm extends Component {
@@ -24,12 +24,12 @@ class PatientForm extends Component {
       systems,
       vets,
       redirectHome,
-      onSubmit } = this.props;
+      onSubmit} = this.props;
 
     const { disabled } = this.state;
 
     return (
-      <div className="container patientForm">
+      <div className="patientForm">
         <form
           className="form-inline"
           onSubmit={handleSubmit((values) => onSubmit(values))}
@@ -192,7 +192,7 @@ class PatientForm extends Component {
               />
             </div>
           </div>
-          <div className="formRow">
+          {/* <div className="formRow">
             <Field
               name="exams.done"
               type="text"
@@ -200,8 +200,8 @@ class PatientForm extends Component {
               label="Exames realizados"
               disabled = {disabled}
             />
-          </div>
-          <div className="formRow">
+            </div>
+            <div className="formRow">
             <Field
               name="exams.pending"
               type="text"
@@ -209,7 +209,7 @@ class PatientForm extends Component {
               label="Exames pendentes"
               disabled = {disabled}
             />
-          </div>
+          </div> */}
         </form>
       </div>
     );

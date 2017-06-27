@@ -9,6 +9,13 @@ export const FETCH_PATIENT = 'FETCH_PATIENT'
 export const SAVE_PATIENT = 'SAVE_PATIENT';
 export const FETCH_VETS = 'FETCH_VETS';
 export const FETCH_SYSTEMS = 'FETCH_SYSTEMS';
+export const SAVE_PENDING = 'SAVE_PENDING';
+export const SAVE_DONE = 'SAVE_DONE';
+export const ADD_PENDING = 'ADD_PENDING';
+export const ADD_DONE = 'ADD_DONE';
+export const DELETE_PENDING = 'DELETE_PENDING';
+export const DELETE_DONE = 'DELETE_DONE';
+
 
 export function setAuth(auth) {
   return {type: SET_AUTH, auth}
@@ -50,7 +57,8 @@ export function fetchPatientList() {
   const patientsRef = db.ref('patients');
   return dispatch => {
     patientsRef.on('value', (snap) => {
-      dispatch({type: FETCH_PATIENTS, payload: snap.val()});
+      const payload = snap.val();
+      dispatch({type: FETCH_PATIENTS, payload});
     })
   }
 }
@@ -59,7 +67,11 @@ export function fetchPatient(register) {
   const patientRef = db.ref(`patients/${register}`);
   return dispatch => {
     patientRef.on('value', (snap) => {
-      dispatch({type: FETCH_PATIENT, payload: snap.val()});
+      const payload = snap.val();
+      dispatch({type: FETCH_PATIENT, payload});
+      dispatch(savePendingExams(payload.exams.pending));
+      dispatch(saveDoneExams(payload.exams.done));
+
     });
   }
 }
@@ -91,4 +103,28 @@ export function fetchSystems() {
       dispatch({type: FETCH_SYSTEMS, payload: snap.val()});
     });
   }
+}
+
+export function savePendingExams(pending) {
+  return {type: SAVE_PENDING, pending};
+}
+
+export function saveDoneExams(done) {
+  return {type: SAVE_DONE, done};
+}
+
+export function addPendingExam(value) {
+  return {type: ADD_PENDING, value};
+}
+
+export function addDoneExam(value) {
+  return {type: ADD_DONE, value};
+}
+
+export function deletePendingExam(idx) {
+  return {type: DELETE_PENDING, idx};
+}
+
+export function deleteDoneExam(idx) {
+  return {type: DELETE_DONE, idx};
 }

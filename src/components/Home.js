@@ -16,7 +16,7 @@ class Home extends Component {
       (auth === "notAuth") ? (
         <Redirect to="/signin" />
       ) : (
-        <div>
+        <div className="container">
           <Header />
           <PatientsList />
         </div>

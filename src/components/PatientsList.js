@@ -9,6 +9,10 @@ class PatientsList extends Component {
     this.props.fetchPatientList();
   }
 
+  renderPendingExams(exams) {
+    return _.map(exams, exam => exam.name).join(', ');
+  }
+
   renderPatients() {
     return _.map(this.props.patients, patient => {
       const { register, name, "exams": { pending, done }, discharge } = patient;
@@ -20,8 +24,8 @@ class PatientsList extends Component {
             </Link>
           </td>
           <td>{name}</td>
-          <td>{done}</td>
-          <td>{pending}</td>
+          <td>{done.join(', ')}</td>
+          <td>{this.renderPendingExams(pending)}</td>
           <td>
             <Link to={`/protocol/${register}`}>
               <span className="glyphicon glyphicon-pushpin" aria-hidden="true"></span>
@@ -41,7 +45,7 @@ class PatientsList extends Component {
     }
 
     return (
-      <div className="container">
+      <div>
         <table className="table table-hover">
           <thead>
             <tr>

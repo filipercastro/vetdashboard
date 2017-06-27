@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { savePatient, fetchVets, fetchSystems } from '../actions'
-import Header from '../components/Header';
+import Header from './Header';
 import PatientForm from './PatientForm';
+import PendingExams from './PendingExams';
+import DoneExams from './DoneExams';
 
 class PatientNew extends Component {
   constructor(props) {
@@ -23,7 +25,7 @@ class PatientNew extends Component {
   render() {
     const { vets, systems, history } = this.props;
     return (
-      <div>
+      <div className="container">
         <Header />
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
@@ -32,6 +34,14 @@ class PatientNew extends Component {
           systems = {systems}
           disabled = {false}
         />
+        <div className="row">
+          <div className="col-xs-4">
+            <DoneExams />
+          </div>
+          <div className="col-xs-8">
+            <PendingExams />
+          </div>
+        </div>
       </div>
     );
   }

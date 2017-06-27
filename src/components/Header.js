@@ -7,7 +7,7 @@ import '../style/header.css';
 class Header extends Component {
   render () {
     return (
-      <div className="container">
+      <div>
         <div className="page-header row">
           <h2 className="col-xs-9">
             Bem Vindo, { this.props.user.name }!
