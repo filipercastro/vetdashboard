@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPatient, savePatient, fetchVets, fetchSystems } from '../actions'
+import { fetchPatient, savePatient, fetchVets, fetchSystems, disableEdit } from '../actions'
 import Header from './Header';
 import PatientForm from './PatientForm';
 import PendingExams from './PendingExams';
@@ -13,8 +13,10 @@ class PatientView extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     const {id} = this.props.match.params;
+
+    this.props.disableEdit();
     this.props.fetchPatient(id);
     this.props.fetchVets();
     this.props.fetchSystems();
@@ -22,11 +24,11 @@ class PatientView extends Component {
 
   onSubmit(values) {
     values.exams = this.props.exams;
-    this.props.savePatient(values, () => this.setState({disabled: true}));
+    this.props.savePatient(values, () => this.props.disableEdit());
   }
 
   render() {
-    const { patient, vets, systems, exams, history } = this.props;
+    const { patient, vets, systems, exams, disabled, history } = this.props;
 
     if (!patient) {
       return <div>Loading...</div>
@@ -41,15 +43,21 @@ class PatientView extends Component {
           vets = {vets}
           systems = {systems}
           initialValues = {patient}
-          disabled = {true}
+          disabled = {disabled}
           editing = {true}
         />
         <div className="row">
           <div className="col-xs-4">
-            <DoneExams done = {exams.done}/>
+            <DoneExams
+              done = {exams.done}
+              disabled = {disabled}
+            />
           </div>
           <div className="col-xs-8">
-            <PendingExams pending = {exams.pending}/>
+            <PendingExams
+              pending = {exams.pending}
+              disabled = {disabled}
+            />
           </div>
         </div>
       </div>
@@ -57,14 +65,15 @@ class PatientView extends Component {
   }
 }
 
-function mapStateToProps({ patients, vets, systems, exams }, ownProps) {
+function mapStateToProps({ patients, vets, systems, exams, disabled }, ownProps) {
   const patient = patients[ownProps.match.params.id];
   return {
            patient,
            vets,
            systems,
-           exams
+           exams,
+           disabled
          };
 }
 
-export default connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, fetchSystems })(PatientView);
+export default connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, fetchSystems, disableEdit })(PatientView);

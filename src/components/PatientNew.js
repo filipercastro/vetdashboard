@@ -37,10 +37,16 @@ class PatientNew extends Component {
         />
         <div className="row">
           <div className="col-xs-4">
-            <DoneExams done = {exams.done}/>
+            <DoneExams
+              done = {exams.done}
+              disabled = {false}
+            />
           </div>
           <div className="col-xs-8">
-            <PendingExams pending = {exams.pending} />
+            <PendingExams
+              pending = {exams.pending}
+              disabled = {false}
+            />
           </div>
         </div>
       </div>

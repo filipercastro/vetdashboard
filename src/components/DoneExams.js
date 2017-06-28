@@ -14,14 +14,14 @@ class DoneExams extends Component {
   }
 
   renderExams() {
-    const { done } = this.props;
+    const { done, disabled } = this.props;
 
     return done.map((exam, index) => {
       return (
         <tr key={index}>
           <td>{exam}</td>
           <td>
-            <button className="clickable_icon" onClick={(elem) => this.deleteExam(elem)}>
+            <button disabled={disabled} className="btn clickable_icon" onClick={(elem) => this.deleteExam(elem)}>
               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </td>
@@ -31,6 +31,7 @@ class DoneExams extends Component {
   }
 
   render () {
+    const { disabled } = this.props;
     return (
       <div>
         <table className="table table-hover">
@@ -48,10 +49,11 @@ class DoneExams extends Component {
                   className="form-control"
                   name="examName"
                   type="text"
+                  disabled={disabled}
                 />
               </td>
               <td>
-                <button className="clickable_icon" onClick={(elem) => this.addExam(elem)}>
+                <button disabled={disabled} className="btn clickable_icon" onClick={(elem) => this.addExam(elem)}>
                   <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
               </td>

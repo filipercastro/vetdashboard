@@ -11,9 +11,9 @@ export default (state = initialState, action) => {
 
   switch (action.type) {
     case SAVE_DONE:
-      return {pending, done: action.done};
+      return {pending, done: action.done ? action.done : []};
     case SAVE_PENDING:
-      return {done, pending: action.pending};
+      return {done, pending: action.pending ? action.pending : []};
     case ADD_DONE:
       return {pending, done: [...done.concat(action.value)]};
     case ADD_PENDING:

@@ -37,7 +37,7 @@ ReactDOM.render(
           <Route path="/signin" component={SignIn} />
           <Route path="/home" component={Home} />
           <Route path="/" render={() => (
-            <Redirect to="/signin" />
+            <Redirect to="/home" />
           )} />
         </Switch>
       </div>

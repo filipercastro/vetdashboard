@@ -15,6 +15,8 @@ export const ADD_PENDING = 'ADD_PENDING';
 export const ADD_DONE = 'ADD_DONE';
 export const DELETE_PENDING = 'DELETE_PENDING';
 export const DELETE_DONE = 'DELETE_DONE';
+export const ENABLE_EDIT = 'ENABLE_EDIT';
+export const DISABLE_EDIT = 'DISABLE_EDIT';
 
 
 export function setAuth(auth) {
@@ -127,4 +129,12 @@ export function deletePendingExam(idx) {
 
 export function deleteDoneExam(idx) {
   return {type: DELETE_DONE, idx};
+}
+
+export function enableEdit() {
+  return {type: ENABLE_EDIT};
+}
+
+export function disableEdit() {
+  return {type: DISABLE_EDIT};
 }
