@@ -13,7 +13,7 @@ class PatientView extends Component {
     this.onSubmit = this.onSubmit.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     const {id} = this.props.match.params;
 
     this.props.disableEdit();

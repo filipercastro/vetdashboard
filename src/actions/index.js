@@ -2,8 +2,6 @@ import { db, auth } from '../firebase';
 
 export const SET_AUTH = 'SET_AUTH';
 export const FETCH_USER = 'FETCH_USER';
-export const LOG_OUT = 'LOG_OUT';
-export const LOG_IN = 'LOG_IN';
 export const FETCH_PATIENTS = 'FETCH_PATIENTS'
 export const FETCH_PATIENT = 'FETCH_PATIENT'
 export const SAVE_PATIENT = 'SAVE_PATIENT';
@@ -50,7 +48,7 @@ export function logOut(callback) {
     auth.signOut()
       .then(() => {
         callback();
-        dispatch({type: LOG_OUT});
+        dispatch(setAuth("notAuth"));
       });
   }
 }
