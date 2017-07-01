@@ -19,7 +19,7 @@ class PatientsList extends Component {
       return (
         <tr key={register}>
           <td>
-            <Link to={`/patient/${register}`}>
+            <Link to={`/main/patient/${register}`}>
               <span>{register}</span>
             </Link>
           </td>
@@ -61,7 +61,7 @@ class PatientsList extends Component {
             {this.renderPatients()}
           </tbody>
         </table>
-        <Link to="/patient/new" className="btn btn-primary">
+        <Link to="/main/patient/new" className="btn btn-primary">
           Admitir novo paciente
         </Link>
       </div>

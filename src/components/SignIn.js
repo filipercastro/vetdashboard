@@ -42,7 +42,7 @@ class SignIn extends Component {
   onSubmit(values) {
     this.props.logIn(
       values,
-      () => {this.props.history.push('/home')},
+      () => {this.props.history.push('/')},
       error => {this.setState({error})}
     );
   }

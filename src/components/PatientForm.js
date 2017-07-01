@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
-import TextField from '../components/TextField';
-import SelectField from './SelectField';
-import CheckboxField from './CheckboxField';
-import FwdField from './FwdField';
+import TextField from './form_fields/TextField';
+import SelectField from './form_fields/SelectField';
+import CheckboxField from './form_fields/CheckboxField';
+import FwdField from './form_fields/FwdField';
 import { enableEdit, disableEdit } from '../actions';
 import '../style/patientForm.css';
 
@@ -18,7 +18,7 @@ class PatientForm extends Component {
       systems,
       vets,
       disabled,
-      redirectHome,
+      redirectMain,
       onSubmit} = this.props;
 
     return (
@@ -31,7 +31,7 @@ class PatientForm extends Component {
             <button
               className="btn btn-primary"
               type="button"
-              onClick={redirectHome}
+              onClick={redirectMain}
             >
               Cancelar
             </button>

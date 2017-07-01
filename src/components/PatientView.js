@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchPatient, savePatient, fetchVets, fetchSystems, disableEdit } from '../actions'
-import Header from './Header';
 import PatientForm from './PatientForm';
 import PendingExams from './PendingExams';
 import DoneExams from './DoneExams';
@@ -36,10 +35,9 @@ class PatientView extends Component {
 
     return (
       <div className="container">
-        <Header />
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
-          redirectHome = {() => history.push('/home')}
+          redirectMain = {() => history.push('/main')}
           vets = {vets}
           systems = {systems}
           initialValues = {patient}
