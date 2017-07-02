@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
-import requireAuth from './hocs/require_auth';
+import requireAuth from './hocs/RequireAuth';
 import Header from './Header';
 import PatientsList from './PatientsList';
 import PatientNew from './PatientNew';
