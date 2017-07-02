@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { savePatient, fetchVets, fetchSystems } from '../actions'
+import { savePatient, fetchVets, fetchSystems, resetExams } from '../actions'
 import PatientForm from './PatientForm';
 import PendingExams from './PendingExams';
 import DoneExams from './DoneExams';
@@ -13,6 +13,7 @@ class PatientNew extends Component {
   }
 
   componentWillMount() {
+    this.props.resetExams();
     this.props.fetchVets();
     this.props.fetchSystems();
   }
@@ -60,4 +61,4 @@ function mapStateToProps({ vets, systems, exams }) {
   };
 }
 
-export default connect(mapStateToProps, { savePatient, fetchVets, fetchSystems })(PatientNew);
+export default connect(mapStateToProps, { savePatient, fetchVets, fetchSystems, resetExams })(PatientNew);

@@ -15,7 +15,9 @@ class PatientsList extends Component {
 
   renderPatients() {
     return _.map(this.props.patients, patient => {
-      const { register, name, "exams": { pending, done }, discharge } = patient;
+      const { register, name, exams, discharge } = patient;
+      const pending = exams ? exams.pending : [];
+      const done = exams ? exams.done : [];
       return (
         <tr key={register}>
           <td>

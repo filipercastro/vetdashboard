@@ -4,7 +4,6 @@ export const SET_AUTH = 'SET_AUTH';
 export const FETCH_USER = 'FETCH_USER';
 export const FETCH_PATIENTS = 'FETCH_PATIENTS'
 export const FETCH_PATIENT = 'FETCH_PATIENT'
-export const SAVE_PATIENT = 'SAVE_PATIENT';
 export const FETCH_VETS = 'FETCH_VETS';
 export const FETCH_SYSTEMS = 'FETCH_SYSTEMS';
 export const SAVE_PENDING = 'SAVE_PENDING';
@@ -13,9 +12,9 @@ export const ADD_PENDING = 'ADD_PENDING';
 export const ADD_DONE = 'ADD_DONE';
 export const DELETE_PENDING = 'DELETE_PENDING';
 export const DELETE_DONE = 'DELETE_DONE';
+export const RESET_EXAMS = 'RESET_EXAMS';
 export const ENABLE_EDIT = 'ENABLE_EDIT';
 export const DISABLE_EDIT = 'DISABLE_EDIT';
-
 
 export function setAuth(auth) {
   return {type: SET_AUTH, auth}
@@ -77,12 +76,12 @@ export function fetchPatient(register) {
 }
 
 export function savePatient(patient, callback) {
+  debugger;
   const patientRef = db.ref(`patients/${patient.register}`);
   return dispatch => {
     patientRef.set(patient)
     .then(() => {
       if (callback) { callback() };
-      dispatch({type: SAVE_PATIENT, patient});
     });
   }
 }
@@ -127,6 +126,10 @@ export function deletePendingExam(idx) {
 
 export function deleteDoneExam(idx) {
   return {type: DELETE_DONE, idx};
+}
+
+export function resetExams() {
+  return {type: RESET_EXAMS};
 }
 
 export function enableEdit() {
