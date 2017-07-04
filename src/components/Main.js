@@ -5,6 +5,7 @@ import Header from './Header';
 import PatientsList from './PatientsList';
 import PatientNew from './PatientNew';
 import PatientView from './PatientView';
+import Protocol from './Protocol';
 
 class Main extends Component {
 
@@ -14,9 +15,9 @@ class Main extends Component {
         <Header />
         <Switch>
           <Route exact path="/main" component={PatientsList} />
-          <Route path="/main/patient/new" component={PatientNew} />
-          <Route path="/main/patient/:id" component={PatientView} />
-          {/*<Route path="/protocol/:id" component={ProtocolView} /> */}
+          <Route exact path="/main/patient/new" component={PatientNew} />
+          <Route exact path="/main/patient/:id" component={PatientView} />
+          <Route path="/main/patient/:id/protocol" component={Protocol} />
         </Switch>
       </div>
     )

@@ -2,10 +2,11 @@ import { db, auth } from '../firebase';
 
 export const SET_AUTH = 'SET_AUTH';
 export const FETCH_USER = 'FETCH_USER';
-export const FETCH_PATIENTS = 'FETCH_PATIENTS'
-export const FETCH_PATIENT = 'FETCH_PATIENT'
+export const FETCH_PATIENTS = 'FETCH_PATIENTS';
+export const FETCH_PATIENT = 'FETCH_PATIENT';
 export const FETCH_VETS = 'FETCH_VETS';
-export const FETCH_SYSTEMS = 'FETCH_SYSTEMS';
+export const ENABLE_EDIT = 'ENABLE_EDIT';
+export const DISABLE_EDIT = 'DISABLE_EDIT';
 export const SAVE_PENDING = 'SAVE_PENDING';
 export const SAVE_DONE = 'SAVE_DONE';
 export const ADD_PENDING = 'ADD_PENDING';
@@ -13,8 +14,10 @@ export const ADD_DONE = 'ADD_DONE';
 export const DELETE_PENDING = 'DELETE_PENDING';
 export const DELETE_DONE = 'DELETE_DONE';
 export const RESET_EXAMS = 'RESET_EXAMS';
-export const ENABLE_EDIT = 'ENABLE_EDIT';
-export const DISABLE_EDIT = 'DISABLE_EDIT';
+export const INIT_PROTOCOL = 'SAVE_PROTOCOL';
+export const ADD_MED = 'ADD_MED';
+export const DELETE_MED = 'DELETE_MED';
+export const RESET_PROTOCOL = 'RESET_PROTOCOL';
 
 export function setAuth(auth) {
   return {type: SET_AUTH, auth}
@@ -68,15 +71,16 @@ export function fetchPatient(register) {
     patientRef.on('value', (snap) => {
       const payload = snap.val();
       dispatch({type: FETCH_PATIENT, payload});
-      dispatch(savePendingExams(payload.exams.pending));
-      dispatch(saveDoneExams(payload.exams.done));
-
+      if (payload.exams) {
+        dispatch(savePendingExams(payload.exams.pending));
+        dispatch(saveDoneExams(payload.exams.done));
+        dispatch(initProtocol(payload.protocol));
+      }
     });
   }
 }
 
 export function savePatient(patient, callback) {
-  debugger;
   const patientRef = db.ref(`patients/${patient.register}`);
   return dispatch => {
     patientRef.set(patient)
@@ -95,13 +99,12 @@ export function fetchVets() {
   }
 }
 
-export function fetchSystems() {
-  const systemsRef = db.ref('systems');
-  return dispatch => {
-    systemsRef.on('value', (snap) => {
-      dispatch({type: FETCH_SYSTEMS, payload: snap.val()});
-    });
-  }
+export function enableEdit() {
+  return {type: ENABLE_EDIT};
+}
+
+export function disableEdit() {
+  return {type: DISABLE_EDIT};
 }
 
 export function savePendingExams(pending) {
@@ -109,7 +112,7 @@ export function savePendingExams(pending) {
 }
 
 export function saveDoneExams(done) {
-  return {type: SAVE_DONE, done};
+    return {type: SAVE_DONE, done};
 }
 
 export function addPendingExam(value) {
@@ -132,10 +135,28 @@ export function resetExams() {
   return {type: RESET_EXAMS};
 }
 
-export function enableEdit() {
-  return {type: ENABLE_EDIT};
+export function saveProtocol(id, protocol, callback) {
+  const protocolRef = db.ref(`patients/${id}/protocol`);
+  return dispatch => {
+    protocolRef.set(protocol)
+    .then(() => {
+      if (callback) { callback() };
+    });
+  }
 }
 
-export function disableEdit() {
-  return {type: DISABLE_EDIT};
+export function initProtocol(protocol) {
+  return {type: INIT_PROTOCOL, protocol};
+}
+
+export function addMed(med) {
+  return {type: ADD_MED, med};
+}
+
+export function deleteMed(idx) {
+  return {type: DELETE_MED, idx};
+}
+
+export function resetProtocol() {
+  return {type: RESET_PROTOCOL};
 }

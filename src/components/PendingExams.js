@@ -24,7 +24,7 @@ class PendingExams extends Component {
   }
 
   renderExams() {
-    const { pending, disabled } = this.props;
+    const { pending } = this.props;
 
     return pending.map((exam, index) => {
       return (
@@ -33,7 +33,7 @@ class PendingExams extends Component {
           <td>{exam.day}</td>
           <td>{exam.time}</td>
           <td>
-            <button disabled={disabled} className="btn clickable_icon" onClick={(elem) => this.deleteExam(elem)}>
+            <button className="btn clickable_icon" onClick={(elem) => this.deleteExam(elem)}>
               <span className="glyphicon glyphicon-remove" aria-hidden="true"></span>
             </button>
           </td>
@@ -43,7 +43,6 @@ class PendingExams extends Component {
   }
 
   render () {
-    const { disabled } = this.props;
     return (
       <div>
         <table className="table table-hover">
@@ -63,7 +62,6 @@ class PendingExams extends Component {
                   className="form-control"
                   name="examName"
                   type="text"
-                  disabled={disabled}
                 />
               </td>
               <td>
@@ -71,7 +69,6 @@ class PendingExams extends Component {
                   className="form-control"
                   name="examDay"
                   type="text"
-                  disabled={disabled}
                 />
               </td>
               <td>
@@ -79,11 +76,10 @@ class PendingExams extends Component {
                   className="form-control"
                   name="examTime"
                   type="text"
-                  disabled={disabled}
                 />
               </td>
               <td>
-                <button disabled={disabled} className="btn clickable_icon" onClick={(elem) => this.addExam(elem)}>
+                <button className="btn clickable_icon" onClick={(elem) => this.addExam(elem)}>
                   <span className="glyphicon glyphicon-ok" aria-hidden="true"></span>
                 </button>
               </td>

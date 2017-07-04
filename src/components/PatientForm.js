@@ -13,7 +13,7 @@ class PatientForm extends Component {
     const {
       handleSubmit,
       submitting,
-      pristine,
+      //pristine,
       editing,
       systems,
       vets,

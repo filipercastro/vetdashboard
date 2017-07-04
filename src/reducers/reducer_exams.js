@@ -6,7 +6,6 @@ const initialState = {
 }
 
 export default (state = initialState, action) => {
-  const { idx } = action;
   const { pending, done } = state;
 
   switch (action.type) {
@@ -21,14 +20,14 @@ export default (state = initialState, action) => {
     case DELETE_PENDING:
       return {
         done,
-        pending: [...pending.slice(0, idx),
-                  ...pending.slice(idx + 1)]
+        pending: [...pending.slice(0, action.idx),
+                  ...pending.slice(action.idx + 1)]
       };
     case DELETE_DONE:
       return {
         pending,
-        done: [...done.slice(0, idx),
-               ...done.slice(idx + 1)]
+        done: [...done.slice(0, action.idx),
+               ...done.slice(action.idx + 1)]
       };
     case RESET_EXAMS:
       return initialState;

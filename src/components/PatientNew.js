@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { savePatient, fetchVets, fetchSystems, resetExams } from '../actions'
+import { savePatient, fetchVets, resetExams } from '../actions'
+import { SYSTEMS } from '../common/constants';
 import PatientForm from './PatientForm';
-import PendingExams from './PendingExams';
-import DoneExams from './DoneExams';
 
 class PatientNew extends Component {
   constructor(props) {
@@ -15,50 +14,33 @@ class PatientNew extends Component {
   componentWillMount() {
     this.props.resetExams();
     this.props.fetchVets();
-    this.props.fetchSystems();
   }
 
   onSubmit(values) {
-    values.exams = this.props.exams;
-    this.props.savePatient(values, () => this.props.history.push('/main'));
+    const redirectURL = `/main/patient/${values.register}`;
+    this.props.savePatient(values, () => this.props.history.push(redirectURL));
   }
 
   render() {
-    const { vets, systems, exams, history } = this.props;
+    const { vets, history } = this.props;
     return (
       <div className="container">
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
           redirectMain = {() => history.push('/main')}
           vets = {vets}
-          systems = {systems}
+          systems = {SYSTEMS}
           disabled = {false}
         />
-        <div className="row">
-          <div className="col-xs-4">
-            <DoneExams
-              done = {exams.done}
-              disabled = {false}
-            />
-          </div>
-          <div className="col-xs-8">
-            <PendingExams
-              pending = {exams.pending}
-              disabled = {false}
-            />
-          </div>
-        </div>
       </div>
     );
   }
 }
 
-function mapStateToProps({ vets, systems, exams }) {
+function mapStateToProps({ vets }) {
   return {
-    exams,
-    vets,
-    systems
+    vets
   };
 }
 
-export default connect(mapStateToProps, { savePatient, fetchVets, fetchSystems, resetExams })(PatientNew);
+export default connect(mapStateToProps, { savePatient, fetchVets, resetExams })(PatientNew);
