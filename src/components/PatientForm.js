@@ -1,44 +1,47 @@
 import React, { Component } from 'react';
 import { Field, reduxForm } from 'redux-form';
-import { connect } from 'react-redux';
 import TextField from './form_fields/TextField';
 import SelectField from './form_fields/SelectField';
 import CheckboxField from './form_fields/CheckboxField';
 import FwdField from './form_fields/FwdField';
-import { enableEdit, disableEdit } from '../actions';
 import '../style/patientForm.css';
 
 class PatientForm extends Component {
+  constructor(props){
+    super(props);
+
+    this.state = {
+      disabled: props.disabled
+    }
+  }
+
   render() {
     const {
       handleSubmit,
       submitting,
-      //pristine,
+      pristine,
       editing,
+      reset,
       systems,
       vets,
-      disabled,
-      redirectMain,
       onSubmit} = this.props;
+
+    const { disabled } = this.state;
 
     return (
       <div className="patientForm">
         <form
           className="form-inline"
-          onSubmit={handleSubmit((values) => onSubmit(values))}
+          onSubmit={handleSubmit((values) => {
+            onSubmit(values);
+            this.setState({disabled: true});
+          })}
         >
           <div className="row formHeader">
             <button
-              className="btn btn-primary"
-              type="button"
-              onClick={redirectMain}
-            >
-              Cancelar
-            </button>
-            <button
               className="btn btn-primary pull-right"
               type="submit"
-              disabled={submitting || disabled}
+              disabled={submitting || pristine || disabled}
             >
               Salvar
             </button>
@@ -46,7 +49,10 @@ class PatientForm extends Component {
               className="btn btn-danger pull-right"
               type="button"
               style={{display: (editing && !disabled) ? "" : "none"}}
-              onClick={() => this.props.disableEdit()}
+              onClick={() => {
+                this.setState({disabled: true});
+                reset();
+              }}
             >
               Cancelar
             </button>
@@ -54,7 +60,7 @@ class PatientForm extends Component {
               className="btn btn-danger pull-right"
               type="button"
               style={{display: (editing && disabled ) ? "" : "none"}}
-              onClick={() => this.props.enableEdit()}
+              onClick={() => this.setState({disabled: false})}
             >
               Editar
             </button>
@@ -191,9 +197,7 @@ class PatientForm extends Component {
   }
 }
 
-export default connect(null, { enableEdit, disableEdit })(
-   reduxForm({
-     form: 'patientEdit',
-     enableReinitialize : true
-   })(PatientForm)
- )
+export default reduxForm({
+  form: 'patientEdit',
+  enableReinitialize : true
+})(PatientForm);

@@ -1,4 +1,10 @@
-import { SAVE_PENDING, SAVE_DONE, ADD_DONE, ADD_PENDING, DELETE_PENDING, DELETE_DONE, RESET_EXAMS } from '../actions';
+import {
+  SAVE_PENDING,
+  SAVE_DONE,
+  ADD_DONE,
+  ADD_PENDING,
+  DELETE_PENDING,
+  DELETE_DONE } from '../actions';
 
 const initialState = {
   done : [],
@@ -29,8 +35,6 @@ export default (state = initialState, action) => {
         done: [...done.slice(0, action.idx),
                ...done.slice(action.idx + 1)]
       };
-    case RESET_EXAMS:
-      return initialState;
     default:
       return state;
   }

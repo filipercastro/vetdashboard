@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { savePatient, fetchVets, resetExams } from '../actions'
+import { savePatient, fetchVets } from '../actions'
 import { SYSTEMS } from '../common/constants';
 import PatientForm from './PatientForm';
 
@@ -12,7 +12,6 @@ class PatientNew extends Component {
   }
 
   componentWillMount() {
-    this.props.resetExams();
     this.props.fetchVets();
   }
 
@@ -25,6 +24,13 @@ class PatientNew extends Component {
     const { vets, history } = this.props;
     return (
       <div className="container">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => history.push('/main')}
+        >
+          Voltar
+        </button>
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
           redirectMain = {() => history.push('/main')}
@@ -43,4 +49,4 @@ function mapStateToProps({ vets }) {
   };
 }
 
-export default connect(mapStateToProps, { savePatient, fetchVets, resetExams })(PatientNew);
+export default connect(mapStateToProps, { savePatient, fetchVets })(PatientNew);

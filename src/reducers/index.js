@@ -6,7 +6,6 @@ import patients from './reducer_patients';
 import vets from './reducer_vets';
 import exams from './reducer_exams';
 import protocol from './reducer_protocol';
-import disabled from './reducer_editState';
 
 const rootReducer = combineReducers({
   auth,
@@ -15,7 +14,6 @@ const rootReducer = combineReducers({
   vets,
   exams,
   protocol,
-  disabled,
   form: formReducer
 });
 

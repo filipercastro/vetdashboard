@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchPatient, savePatient, fetchVets, disableEdit } from '../actions'
+import { fetchPatient, savePatient, fetchVets, saveExams } from '../actions'
 import { SYSTEMS } from '../common/constants';
 import PatientForm from './PatientForm';
 import PendingExams from './PendingExams';
@@ -16,18 +16,16 @@ class PatientView extends Component {
   componentWillMount() {
     const {id} = this.props.match.params;
 
-    this.props.disableEdit();
     this.props.fetchPatient(id);
     this.props.fetchVets();
   }
 
   onSubmit(values) {
-    values.exams = this.props.exams;
-    this.props.savePatient(values, () => this.props.disableEdit());
+    this.props.savePatient(values);
   }
 
   render() {
-    const { patient, vets, exams, disabled, history } = this.props;
+    const { patient, vets, exams, history } = this.props;
     const { id } = this.props.match.params;
 
     if (!patient) {
@@ -36,13 +34,19 @@ class PatientView extends Component {
 
     return (
       <div className="container">
+        <button
+          className="btn btn-primary"
+          type="button"
+          onClick={() => history.push('/main')}
+        >
+          Voltar
+        </button>
         <PatientForm
           onSubmit = {(values) => this.onSubmit(values)}
-          redirectMain = {() => history.push('/main')}
           vets = {vets}
           systems = {SYSTEMS}
           initialValues = {patient}
-          disabled = {disabled}
+          disabled = {true}
           editing = {true}
         />
         <div className="row">
@@ -60,6 +64,13 @@ class PatientView extends Component {
         <button
           className="btn btn-primary"
           type="button"
+          onClick={() => this.props.saveExams(id, exams)}
+        >
+          Salvar exames
+        </button>
+        <button
+          className="btn btn-primary"
+          type="button"
           onClick={() => this.props.history.push(`/main/patient/${id}/protocol`)}
         >
           Editar Protocolo
@@ -69,14 +80,13 @@ class PatientView extends Component {
   }
 }
 
-function mapStateToProps({ patients, vets, exams, disabled }, ownProps) {
+function mapStateToProps({ patients, vets, exams }, ownProps) {
   const patient = patients[ownProps.match.params.id];
   return {
            patient,
            vets,
-           exams,
-           disabled
+           exams
          };
 }
 
-export default connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, disableEdit })(PatientView);
+export default connect(mapStateToProps, { fetchPatient, savePatient, fetchVets, saveExams })(PatientView);
