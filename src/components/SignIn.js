@@ -5,7 +5,7 @@ import { logIn } from '../actions'
 import TextField from './form_fields/TextField';
 import PasswordField from './form_fields/PasswordField';
 import '../style/signin.css';
-import doge from "../images/doge.png";
+import logo from "../images/logo.png";
 
 class SignIn extends Component {
   constructor(props) {
@@ -30,33 +30,33 @@ class SignIn extends Component {
 
     return (
       <div className="signinContainer">
-        <div className="header">
-          <img src={doge} alt="Doge" height="42" width="42" />
-          <h3 className="text-center">Vet Dashboard</h3>
+        <div className="logo">
+          <img src={logo} alt="Logo"/>
         </div>
-        <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-          <Field
-            name="email"
-            component={TextField}
-            label="Email"
-            placeholder="Email"
-          />
-          <Field
-            name="password"
-            component={PasswordField}
-            label="Senha"
-            placeholder="Senha"
-          />
-          <div className="error text-center">{this.state.error.message}</div>
-          <div>
-            <button
-              className="btn btn-primary"
-              type="submit"
-              disabled={submitting || pristine}>
-              Entrar
-            </button>
-          </div>
-        </form>
+        <div>
+          <h3>Vet Dashboard</h3>
+          <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
+            <Field
+              name="email"
+              component={TextField}
+              placeholder="Email"
+            />
+            <Field
+              name="password"
+              component={PasswordField}
+              placeholder="Senha"
+            />
+            <div className="error text-center">{this.state.error.message}</div>
+            <div>
+              <button
+                className="btn btn-primary pull-right"
+                type="submit"
+                disabled={submitting || pristine}>
+                Entrar
+              </button>
+            </div>
+          </form>
+        </div>
       </div>
     )
   }

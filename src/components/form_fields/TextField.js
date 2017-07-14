@@ -1,7 +1,7 @@
 import React from "react";
 
 const TextField = ({ input, label, placeholder, className, disabled }) => (
-  <div className={`form-group ${className}`}>
+  <div className={`${className}`}>
     <label>{label}</label>
     <input
       className = "form-control"

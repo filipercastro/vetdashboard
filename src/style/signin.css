@@ -1,40 +1,33 @@
 .signinContainer {
-  width: 380px;
+  width: 510px;
   margin-top: 60px;
   margin-left: auto;
   margin-right: auto;
-  padding: 15px;
-  border-radius: 4px;
-  box-shadow: 0 0 3px 3px rgba(124, 124, 124, 0.37);
+  display: flex;
+}
+
+.signinContainer .logo {
+  margin-right: 50px;
+  margin-top: 30px;
 }
 
 .signinContainer h3 {
-  margin-top: 10px;
-  margin-bottom: 20px;
+  margin-bottom: 0;
+}
+
+.signinContainer input {
+  margin-bottom: 0px;
+  width: 240px;
 }
 
 .signinContainer button {
-  margin-top: 5px;
-}
-
-.signinContainer .form-group {
-  margin-bottom: 5px;
-  margin-top: 5px;
+  margin-top: 8px;
 }
 
 .signinContainer .error {
   color: red;
-}
-
-.signinContainer .header img {
-  position: relative;
-  float: left;
-  bottom: 8px;
-  left: 8px;
-}
-
-.signinContainer .header h3 {
-  font-weight: bold;
-  font-family: cursive;
-  color: #d47283;
+  width: 240px;
+  text-align: left;
+  font-size: 12px;
+  margin-top: 5px;
 }
