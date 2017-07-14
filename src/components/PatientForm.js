@@ -68,7 +68,6 @@ class PatientForm extends Component {
           <div className="row formRow">
             <Field
               name="name"
-              type="text"
               component={TextField}
               label="Paciente"
               className = "col-xs-3"
@@ -76,7 +75,6 @@ class PatientForm extends Component {
             />
             <Field
               name="register"
-              type="text"
               component={TextField}
               label="Ficha"
               className = "col-xs-3"
@@ -84,7 +82,6 @@ class PatientForm extends Component {
             />
             <Field
               name="species"
-              type="text"
               component={SelectField}
               options={["Cachorro", "Gato"]}
               label="Espécie"
@@ -93,7 +90,6 @@ class PatientForm extends Component {
             />
             <Field
               name="race"
-              type="text"
               component={TextField}
               label="Raça"
               className = "col-xs-3"
@@ -103,7 +99,6 @@ class PatientForm extends Component {
           <div className="row formRow">
             <Field
               name="age"
-              type="text"
               component={TextField}
               label="Idade"
               className = "col-xs-3"
@@ -111,7 +106,6 @@ class PatientForm extends Component {
             />
             <Field
               name="weight"
-              type="text"
               component={TextField}
               label="Peso (Kg)"
               className = "col-xs-3"
@@ -119,7 +113,6 @@ class PatientForm extends Component {
             />
             <Field
               name="genre"
-              type="select"
               component={SelectField}
               label="Sexo"
               options={["M", "F"]}
@@ -128,7 +121,6 @@ class PatientForm extends Component {
             />
             <Field
               name="admissionVet"
-              type="select"
               component={SelectField}
               label="Internado por"
               options={vets}
@@ -139,7 +131,6 @@ class PatientForm extends Component {
           <div className="row formRow">
             <Field
               name="system"
-              type="select"
               component={SelectField}
               label="Sistema Envolvido"
               options={systems}
@@ -148,7 +139,6 @@ class PatientForm extends Component {
             />
             <Field
               name="preDiagnose"
-              type="text"
               component={TextField}
               label="Suspeitas"
               className = "col-xs-7"
@@ -158,7 +148,6 @@ class PatientForm extends Component {
           <div className="row formRow">
             <Field
               name = "fwd"
-              type = "checkbox"
               component = {CheckboxField}
               label = "Encaminhado"
               className = "col-xs-2"
@@ -167,7 +156,6 @@ class PatientForm extends Component {
             <div id="col-xs-10 row">
               <Field
                 name="fwdInfo.vet"
-                type="text"
                 component={FwdField}
                 label="M.V."
                 className = "col-xs-3"
@@ -175,7 +163,6 @@ class PatientForm extends Component {
               />
               <Field
                 name="fwdInfo.clinic"
-                type="text"
                 component={FwdField}
                 label="Clínica"
                 className = "col-xs-3"
@@ -183,7 +170,6 @@ class PatientForm extends Component {
               />
               <Field
                 name="fwdInfo.cel"
-                type="text"
                 component={FwdField}
                 label="Cel"
                 className = "col-xs-3"

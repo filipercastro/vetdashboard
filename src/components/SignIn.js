@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { logIn } from '../actions'
+import TextField from './form_fields/TextField';
+import PasswordField from './form_fields/PasswordField';
 import '../style/signin.css';
 import doge from "../images/doge.png";
 
@@ -13,30 +15,6 @@ class SignIn extends Component {
         message: ''
       }
     }
-  }
-
-  renderField(field) {
-    const { input, label, type, meta: { touched, error } } = field;
-
-    return (
-      <div>
-        <div className="form-group row">
-          <label className="col-xs-3">{label}:</label>
-          <div className="col-xs-9">
-            <input {...input} className="form-control" placeholder={label} type={type} />
-          </div>
-        </div>
-        {touched && error &&
-          <div className="row">
-            <div className="col-xs-3"></div>
-            <div className="error col-xs-9">
-              <i className="glyphicon glyphicon glyphicon-ban-circle"></i>
-              &nbsp;
-              <span>{error}</span>
-            </div>
-          </div>}
-      </div>
-    )
   }
 
   onSubmit(values) {
@@ -59,15 +37,15 @@ class SignIn extends Component {
         <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
           <Field
             name="email"
-            type="email"
-            component={this.renderField}
+            component={TextField}
             label="Email"
+            placeholder="Email"
           />
           <Field
             name="password"
-            type="password"
-            component={this.renderField}
+            component={PasswordField}
             label="Senha"
+            placeholder="Senha"
           />
           <div className="error text-center">{this.state.error.message}</div>
           <div>
