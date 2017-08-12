@@ -29,7 +29,7 @@ class PatientForm extends Component {
     const { disabled } = this.state;
 
     return (
-      <div className="patientForm test">
+      <div className="patientForm">
         <form
           className="form-inline"
           onSubmit={handleSubmit((values) => {
